@@ -15,12 +15,14 @@
 </h:head>
 <h:body>
 
-	<h:form>
-		<h:panelGrid rows="2">
+	<h:form id="formRec">
 			<h:outputText value="#{textoBean.recombinando}" />
-			<p:commandButton value="Adiciona Linha"
-				action="#{textoBean.adicionaLinha}" />
-		</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:commandButton value="Adiciona Linha" update="formRec"
+					action="#{textoBean.adicionaLinha}" />
+				<p:commandButton value="Voltar a tela inicial"
+					action="/index?redirect=true" />
+			</h:panelGrid>
 	</h:form>
 </h:body>
 </html>

@@ -1,5 +1,9 @@
 package modal;
 
+import java.util.List;
+
 public interface Recombinacoes {
-	String recombina(String texto);
+	List<String> recombina(List<String> texto, int line);
+	
+	int linhaRecombinada(List<String> texto);
 }

@@ -15,10 +15,11 @@
 <h:body>
 	<f:view>
 		<h:form>
+			<p:growl id="growl" showDetail="true" sticky="true" />
 			<h:panelGrid columns="3" id="form">
 				<p:commandButton value = "Vizualizar Textos" action = "/mostraTextos.xhtml?faces-redirect=true"/>
 				<p:commandButton  action="/cadastraTexto?faces-redirect=true"
-							ajax="false" style="margin-left: 20px" value="Cadastrar Texto" />
+							style="margin-left: 20px" value="Cadastrar Texto" />
 			</h:panelGrid>
 		</h:form>
 	</f:view>

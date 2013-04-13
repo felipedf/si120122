@@ -13,52 +13,49 @@
 </h:head>
 <h:body>
 	<f:view id="view">
-		<h:form name="form">
-			<p:dataTable id="table" var="txt" value="#{textoBean.textos}"
-				rendered="#{not empty textoBean.textos}" border="1">
+		<h:form id="form">
+			<p:dataTable id="textTable" var="txt" value="#{textoBean.textoData}"
+				paginator="true" rows="10" selection="#{textoBean.textoSelecionado}">
+				<p:column selectionMode="single" style="width:2%" />
 				<p:column name="coluna1" headerText="Textos">
-					<p:commandLink id="textos" value="#{txt.texto}"
-						onclick="text1.show();" type="button" action="/recombinando?faces-redirect=true" />
+				 	<h:outputText value="#{txt.texto}" />
 				</p:column>
-				<p:column>
-					<p:outputPanel id="customPanel">
-						<p:selectOneRadio id="customRadio" value="#{txt.tipoRecombinacao}"
-							layout="custom">
+
+				<f:facet name="footer">
+						<p:selectOneRadio id="customRadio" value="#{textoBean.rec}" layout="custom">
 							<f:selectItem itemLabel="rec 1" itemValue="COM_REPETICAO" />
 							<f:selectItem itemLabel="rec 2" itemValue="SEM_REPETICAO" />
-							<f:selectItem itemLabel="rec 3" itemValue="INVERTE" />
+							<f:selectItem itemLabel="rec 3" itemValue="INVERTER" />
 						</p:selectOneRadio>
 
-						<h:panelGrid columns="3" rows="2">
+						<h:panelGrid columns="2">
 							<p:radioButton id="opt1" for="customRadio" itemIndex="0" />
-							<p:radioButton id="opt2" for="customRadio" itemIndex="1" />
-							<p:radioButton id="opt3" for="customRadio" itemIndex="2" />
-
 							<h:outputLabel for="opt1" value="Aleatorio com repeticao" />
+							<p:radioButton id="opt2" for="customRadio" itemIndex="1" />
 							<h:outputLabel for="opt2" value="Aleatorio sem repeticao" />
+							<p:radioButton id="opt3" for="customRadio" itemIndex="2" />
 							<h:outputLabel for="opt3" value="Inverter" />
 						</h:panelGrid>
-					</p:outputPanel>
-				</p:column>
+					<h:outputText value ="#{textoBean.textoSelecionado}"/>
+					<p:commandButton id="multiViewButton" value="Recombina"
+						action="#{textoBean.recombina}" />
+					<p:commandButton value="Voltar" action="/index?faces-redirect=true" />
+				</f:facet>
 			</p:dataTable>
-
 			<p:dialog header="Recombinar Texto" resizable="false"
 				widgetVar="rec1" modal="true" showEffect="explode"
 				hideEffect="bounce" height="100">
-				<h:panelGrid columns="3" rows="2">
-					<p:commandLink value="rec1" onclick="setRecomb1()" />
-					<p:commandLink value="rec2" onclick="setRecomb2()"
-						style="margin-left: 30px" />
+				<h:panelGrid id="panel" columns="3" rows="2">
+					<p:commandLink value="rec1" onclick="" />
+					<p:commandLink value="rec2" onclick="" style="margin-left: 30px" />
 					<p:commandLink value="rec3" actionListener="#"
 						style="margin-left: 30px" />
 				</h:panelGrid>
-				<p:commandButton value="Recombinar" action="#{textoBean.recombina}" />
 			</p:dialog>
 
 			<p:dialog header="Texto Completo" widgetVar="text1" modal="true"
 				showEffect="explode" hideEffect="transparence" height="100">
 			</p:dialog>
-			<p:commandButton value="Voltar" action="/index?faces-redirect=true" />
 		</h:form>
 	</f:view>
 </h:body>
